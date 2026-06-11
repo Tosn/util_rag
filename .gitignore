@@ -1,0 +1,39 @@
+# === Secrets / env ===
+.env
+.env.*
+!.env.example
+
+# === Python (backend) ===
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# === Data / runtime (不进 Git) ===
+# Chroma 向量库持久化目录
+chroma/
+**/chroma_db/
+# SQLite 数据库
+*.db
+*.sqlite
+*.sqlite3
+# 上传的文档
+uploads/
+**/uploads/
+
+# === Frontend (Vue + Vite) ===
+node_modules/
+frontend/dist/
+*.local
+
+# === Editor / OS ===
+.DS_Store
+.idea/
+.vscode/
+
+# === Claude local settings (个人配置,不进 Git) ===
+.claude/settings.local.json
