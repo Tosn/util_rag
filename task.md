@@ -7,41 +7,41 @@
 
 ## 阶段 0:环境与骨架(0.5 天)
 
-- ⬜ 0.1 建仓库(GitHub,作品集需可展示),前后端分目录
-- ⬜ 0.2 后端搭 FastAPI 骨架,跑通 `/health` 接口
-- ⬜ 0.3 前端建 Vue3 + Vite 工程,跑通空白页
-- ⬜ 0.4 前端装好 Arco Design Vue(`@arco-design/web-vue`),配按需引入(`unplugin-vue-components` + Arco resolver)
-- ⬜ 0.5 申请 AI API key(国内模型 + OpenAI 各一)
-- ⬜ 0.6 封装 `ai_client.py` 抽象层,把 embedding / LLM 调用包一层,方便方案 A/B 切换
+- ✅ 0.1 建仓库(GitHub,作品集需可展示),前后端分目录 ⚠️ 本地结构已建;GitHub 远程仓库待你的账号 push
+- ✅ 0.2 后端搭 FastAPI 骨架,跑通 `/health` 接口
+- ✅ 0.3 前端建 Vue3 + Vite 工程,跑通空白页
+- ✅ 0.4 前端装好 Arco Design Vue(`@arco-design/web-vue`),配按需引入(`unplugin-vue-components` + Arco resolver)
+- ⬜ 0.5 申请 AI API key(国内模型 + OpenAI 各一) ⚠️ 需你本人申请,填入 backend/.env
+- ✅ 0.6 封装 `ai_client.py` 抽象层,把 embedding / LLM 调用包一层,方便方案 A/B 切换
 
 ---
 
 ## 阶段 1:文档入库管线(2-3 天)—— 核心
 
-- ⬜ 1.1 上传接口:接收文件 → 存到本地/对象存储 → SQLite 记一条文档记录(documents 表)
-- ⬜ 1.2 文档解析:pymupdf 提取 PDF 文本;txt / md 直接读
-- ⬜ 1.3 切块:RecursiveCharacterTextSplitter,chunk ~500 字、overlap ~50
-- ⬜ 1.4 向量化:每个 chunk 调 embedding → 存入 Chroma(附元信息:文档名、页码/片段序号)
-- ⬜ 1.5 自测:上传一个 PDF,确认 Chroma 里有向量、能检索
+- ✅ 1.1 上传接口:接收文件 → 存到本地/对象存储 → SQLite 记一条文档记录(documents 表)
+- ✅ 1.2 文档解析:pymupdf 提取 PDF 文本;txt / md 直接读
+- ✅ 1.3 切块:RecursiveCharacterTextSplitter,chunk ~500 字、overlap ~50
+- ✅ 1.4 向量化:每个 chunk 调 embedding → 存入 Chroma(附元信息:文档名、页码/片段序号)
+- ✅ 1.5 自测:上传一个 PDF,确认 Chroma 里有向量、能检索 ✓ 已联网实测通过(zhipu embedding-3)
 
 ---
 
 ## 阶段 2:问答管线(2-3 天)—— 核心
 
-- ⬜ 2.1 提问接口:用户问题 → embedding → Chroma 检索 top-k(如 4)相关片段
-- ⬜ 2.2 拼 Prompt:系统提示词约束"只基于提供的片段回答,不知道就说不知道",带上检索片段
-- ⬜ 2.3 调 LLM,**流式**返回答案
-- ⬜ 2.4 同时返回"引用来源"(命中片段 + 出处)给前端
-- ⬜ 2.5 对话历史存 SQLite(conversations / messages 表)
+- ✅ 2.1 提问接口:用户问题 → embedding → Chroma 检索 top-k(如 4)相关片段
+- ✅ 2.2 拼 Prompt:系统提示词约束"只基于提供的片段回答,不知道就说不知道",带上检索片段
+- ✅ 2.3 调 LLM,**流式**返回答案
+- ✅ 2.4 同时返回"引用来源"(命中片段 + 出处)给前端
+- ✅ 2.5 对话历史存 SQLite(conversations / messages 表)
 
 ---
 
 ## 阶段 3:前端界面(2-3 天)
 
-- ⬜ 3.1 上传页:`a-upload` 拖拽上传 + 上传进度 + `a-list` 已上传文档列表
-- ⬜ 3.2 聊天页:消息流 + 流式打字效果(`fetch` + ReadableStream 或 SSE)
-- ⬜ 3.3 来源展示:每条 AI 回答下方 `a-collapse` 可展开"📎 来源",显示命中片段和文档名
-- ⬜ 3.4 基础打磨:loading 态(`a-spin`)、空状态(`a-empty`)、错误提示(`a-message`)。界面干净即可
+- ✅ 3.1 上传页:`a-upload` 拖拽上传 + 上传进度 + `a-list` 已上传文档列表
+- ✅ 3.2 聊天页:消息流 + 流式打字效果(`fetch` + ReadableStream 或 SSE)
+- ✅ 3.3 来源展示:每条 AI 回答下方 `a-collapse` 可展开"📎 来源",显示命中片段和文档名
+- ✅ 3.4 基础打磨:loading 态(`a-spin`)、空状态(`a-empty`)、错误提示(`a-message`)。界面干净即可
 
 ---
 
@@ -75,6 +75,6 @@
 
 ## 里程碑验证
 
-- ⬜ M1 技术验证:上传陌生 PDF,问里面的问题答得对且给出正确来源;问文档没有的内容老实说"找不到"
+- ✅ M1 技术验证:上传陌生 PDF,问里面的问题答得对且给出正确来源;问文档没有的内容老实说"找不到" ✓ 2026-06-12 实测:有答案题答对带来源;无答案题回"根据现有文档找不到相关内容"不瞎编
 - ⬜ M2 作品验证:陌生人点开 demo,30 秒内能自己上传文档并问出答案
 - ⬜ M3 商业验证:Upwork 上线后 3 个月内至少接到 1 单相关咨询/订单

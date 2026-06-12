@@ -1,0 +1,9 @@
+fastapi
+uvicorn[standard]
+python-multipart
+sqlmodel
+chromadb
+pymupdf
+langchain-text-splitters
+openai
+pydantic-settings
