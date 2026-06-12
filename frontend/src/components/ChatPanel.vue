@@ -28,8 +28,9 @@ async function send() {
   sending.value = true
 
   messages.value.push({ role: 'user', content: question })
-  const assistant = { role: 'assistant', content: '', sources: [], streaming: true }
-  messages.value.push(assistant)
+  // 先 push,再从数组取回「响应式代理」引用来改;直接改原始对象不会触发重渲染
+  messages.value.push({ role: 'assistant', content: '', sources: [], streaming: true })
+  const assistant = messages.value[messages.value.length - 1]
   scrollToBottom()
 
   await chatStream(
