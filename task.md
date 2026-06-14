@@ -11,7 +11,7 @@
 - ✅ 0.2 后端搭 FastAPI 骨架,跑通 `/health` 接口
 - ✅ 0.3 前端建 Vue3 + Vite 工程,跑通空白页
 - ✅ 0.4 前端装好 Arco Design Vue(`@arco-design/web-vue`),配按需引入(`unplugin-vue-components` + Arco resolver)
-- ⬜ 0.5 申请 AI API key(国内模型 + OpenAI 各一) ⚠️ 需你本人申请,填入 backend/.env
+- ✅ 0.5 申请 AI API key(国内模型 + OpenAI 各一) ⚠️ 需你本人申请,填入 backend/.env
 - ✅ 0.6 封装 `ai_client.py` 抽象层,把 embedding / LLM 调用包一层,方便方案 A/B 切换
 
 ---
@@ -48,14 +48,14 @@
 ## 阶段 4:部署与包装(1-2 天)—— 决定能不能变现
 
 > 目标环境:已有的 Vultr VPS(1GB 内存,当前在跑 VPN),两者共存互不干扰。
-> ⚠️ 域名当前等 Visa 信用卡下来后再买,4.0 / 4.5 暂挂起;其余可先做。
+> ✅ 域名已就绪:rag.to-sn.com 已申请并指向 Vultr VPS(45.76.202.250),4.0 / 4.5 解除挂起。
 
-- ⬜ 4.0 前置:买域名(Cloudflare/Namecheap)+ 加 A 记录指向 Vultr IP;放行 80 / 443 端口 ⏸️(等卡)
+- ✅ 4.0 前置:买域名(Cloudflare/Namecheap)+ 加 A 记录指向 Vultr IP;放行 80 / 443 端口 ✓ rag.to-sn.com → 45.76.202.250
 - ⬜ 4.1 给 VPS 加 2GB Swap → 启用 → 写入 `/etc/fstab` 持久化(必做)
 - ⬜ 4.2 VPS 装 Docker + Docker Compose
 - ⬜ 4.3 后端 Docker 化:写 `Dockerfile`;SQLite / Chroma / 上传目录用 volume 挂到宿主机
 - ⬜ 4.4 前端 `vite build` 产出 `dist/` 静态文件
-- ⬜ 4.5 写 `Caddyfile`:根路径服务前端 dist,`/api/*` 反代后端,Caddy 自动 HTTPS ⏸️(依赖域名)
+- ⬜ 4.5 写 `Caddyfile`:根路径服务前端 dist,`/api/*` 反代后端,Caddy 自动 HTTPS
 - ⬜ 4.6 写 `docker-compose.yml`(backend + caddy),`docker compose up -d` 启动
 - ⬜ 4.7 配 `.env`:AI API key、模型选择(方案 A/B);`.env` 不进 Git
 - ⬜ 4.8 上线验证:浏览器开站点确认上传+问答+HTTPS 正常;`docker compose logs` 排错;`free -h` 看内存/swap
